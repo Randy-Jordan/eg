@@ -1,0 +1,8 @@
+[gitea]
+enabled = true
+filter   = gitea-4xx
+logpath  = /var/lib/gitea/log/gitea.log
+findtime = 300
+maxretry = 10
+bantime  = 360000
+action = iptables-allports

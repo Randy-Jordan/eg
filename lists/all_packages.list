@@ -1,0 +1,13 @@
+gpg
+build-essential
+coreutils
+tmux
+zsh
+vim-gtk3
+universal-ctags
+fzf
+git
+wget
+curl
+prips
+jq

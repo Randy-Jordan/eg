@@ -1,0 +1,16 @@
+Source: mypackage
+Section: utils
+Priority: optional
+Maintainer: Your Name <your.email@example.com>
+Build-Depends: debhelper (>= 12), gcc
+Standards-Version: 4.5.0
+Homepage: http://example.com/mypackage
+Vcs-Git: https://example.com/mypackage.git
+Vcs-Browser: https://example.com/mypackage
+
+Package: mypackage
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: My sample package
+ This is a short description of my package.
+ More detailed explanation of what the package does.
