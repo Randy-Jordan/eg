@@ -53,9 +53,24 @@ $(OBJ):
 $(TEST)/bin:
 	mkdir $@
 
-# Run the tests in the bin folder. Parent folder is working dir, not test | bin.
+# Run the tests in the bin folder and track results
 test: $(LIB) $(TEST)/bin $(TESTBINS)
-	for test in $(TESTBINS); do ./$$test ; done
+	@SUCCESS_COUNT=0; FAILURE_COUNT=0; \
+	for test in $(TESTBINS); do \
+		./$$test; \
+		EXIT_CODE=$$?; \
+		TEST_NAME=$(notdir $$test); \
+		if [ $$EXIT_CODE -eq 0 ]; then \
+			echo -n "\033[0;32m$$TEST_NAME: EXIT CODE: $$EXIT_CODE (SUCCESS)\033[0m"; \
+			SUCCESS_COUNT=$$((SUCCESS_COUNT + 1)); \
+		else \
+			echo -n "\033[0;31m$$TEST_NAME: EXIT CODE: $$EXIT_CODE (FAILURE)\033[0m"; \
+			FAILURE_COUNT=$$((FAILURE_COUNT + 1)); \
+		fi; \
+	done; \
+	echo "\n\nTests completed"; \
+	echo "SUCCESS: $$SUCCESS_COUNT"; \
+	echo "FAILURE: $$FAILURE_COUNT";
 
 clean:
 	$(RM) -r $(LIBDIR) $(OBJ) $(TEST)/bin/
